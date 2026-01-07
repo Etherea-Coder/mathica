@@ -12,43 +12,38 @@ export default function DownloadButton() {
     useEffect(() => {
         setMounted(true);
 
-        // Check if app is already running in standalone mode
         const isStandalone = window.matchMedia('(display-mode: standalone)').matches
             || (window.navigator as any).standalone
             || document.referrer.includes('android-app://');
 
         setIsInstalled(isStandalone);
 
+        // Fallback: show button after 2 seconds if not installed, even without prompt
+        const initialTimer = setTimeout(() => {
+            if (!isStandalone) {
+                setIsVisible(true);
+            }
+        }, 2000);
+
         const handleBeforeInstallPrompt = (e: Event) => {
-            // Prevent the mini-infobar from appearing on mobile
             e.preventDefault();
-            // Stash the event so it can be triggered later.
             setDeferredPrompt(e);
-            // Show the button if it's not installed
             if (!isStandalone) {
                 setIsVisible(true);
             }
         };
 
         const handleAppInstalled = () => {
-            // Clear the deferredPrompt
             setDeferredPrompt(null);
             setIsInstalled(true);
             setIsVisible(false);
-            console.log('Mathica was installed');
         };
 
         window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
         window.addEventListener('appinstalled', handleAppInstalled);
 
-        // Initial check for visibility (sometimes beforeinstallprompt doesn't fire if already handled)
-        if (!isStandalone) {
-            // We wait for the event, but we can also check if we can potentially show it
-            // Some browsers might not fire it if the user has dismissed it before.
-            // For now, we rely on the event for the prompt to work.
-        }
-
         return () => {
+            clearTimeout(initialTimer);
             window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
             window.removeEventListener('appinstalled', handleAppInstalled);
         };
