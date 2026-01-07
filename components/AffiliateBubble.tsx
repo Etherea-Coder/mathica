@@ -46,6 +46,14 @@ interface AffiliateBubbleProps {
 }
 
 const AffiliateBubble: React.FC<AffiliateBubbleProps> = ({ isVisible, onClose, offer }) => {
+    const [mounted, setMounted] = React.useState(false);
+
+    React.useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
+
     return (
         <AnimatePresence>
             {isVisible && offer && (
@@ -112,11 +120,9 @@ const AffiliateBubble: React.FC<AffiliateBubbleProps> = ({ isVisible, onClose, o
                         </div>
 
                         {/* CTA Button */}
-                        <a
-                            href={offer.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="block w-full py-4 rounded-full text-center font-semibold font-exo transition-all hover:scale-105 active:scale-95"
+                        <button
+                            onClick={() => window.open(offer.link, '_blank')}
+                            className="block w-full py-4 rounded-full text-center font-semibold font-exo transition-all hover:scale-105 active:scale-95 cursor-pointer"
                             style={{
                                 background: 'rgba(250, 245, 235, 0.9)',
                                 color: '#8b7355',
@@ -126,7 +132,7 @@ const AffiliateBubble: React.FC<AffiliateBubbleProps> = ({ isVisible, onClose, o
                             }}
                         >
                             Learn More →
-                        </a>
+                        </button>
 
                         {/* Small disclaimer */}
                         <p

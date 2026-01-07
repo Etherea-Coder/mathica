@@ -4,8 +4,8 @@
     "description": "A delightful, gesture-driven calculator with bubble physics",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#F0F8FF",
-    "theme_color": "#A8E6CF",
+    "background_color": "#262626",
+    "theme_color": "#c9b896",
     "orientation": "portrait",
     "icons": [
         {
