@@ -56,10 +56,10 @@ export default function Home() {
                     className="text-center mb-8 mt-4"
                 >
                     <h1 className="font-exo font-bold text-4xl md:text-5xl text-[#c9b896] drop-shadow-[0_3px_15px_rgba(201,184,150,0.4)] mb-2">
-                        <span style={{ filter: 'sepia(1) saturate(2) hue-rotate(5deg)' }}>🧼</span> Mathica
+                        <span style={{ filter: 'sepia(1) saturate(2) hue-rotate(5deg)' }}>🫧</span> Mathica
                     </h1>
                     <p className="text-[#c9b896]/75 text-lg font-exo font-medium">
-                        Pure Calculation, Majestic Delight
+                        Where Mathematics Meets Delight
                     </p>
                 </motion.div>
 
